@@ -28,13 +28,15 @@ class DBWTestNode(object):
     def __init__(self):
         rospy.init_node('dbw_test_node')
 
+        # Subscribe vehicle output
         rospy.Subscriber('/vehicle/steering_cmd', SteeringCmd, self.steer_cb)
         rospy.Subscriber('/vehicle/throttle_cmd', ThrottleCmd, self.throttle_cb)
-        rospy.Subscriber('/vehicle/brake_cmd', BrakeCmd, self.brake_cb)
+        rospy.Subscriber('/vehicle/brake_cmd',    BrakeCmd,    self.brake_cb)
 
+        # Subscribe actual recoreded command
         rospy.Subscriber('/actual/steering_cmd', SteeringCmd, self.actual_steer_cb)
         rospy.Subscriber('/actual/throttle_cmd', ThrottleCmd, self.actual_throttle_cb)
-        rospy.Subscriber('/actual/brake_cmd', BrakeCmd, self.actual_brake_cb)
+        rospy.Subscriber('/actual/brake_cmd',    BrakeCmd,    self.actual_brake_cb)
 
         rospy.Subscriber('/vehicle/dbw_enabled', Bool, self.dbw_enabled_cb)
 
@@ -46,6 +48,7 @@ class DBWTestNode(object):
 
         self.dbw_enabled = False
 
+        # Three vehicle testing control commands for steering, throttle and brakes
         base_path = os.path.dirname(os.path.abspath(__file__))
         self.steerfile = os.path.join(base_path, 'steers.csv')
         self.throttlefile = os.path.join(base_path, 'throttles.csv')
