@@ -163,7 +163,7 @@ class TLDetector(object):
         # Keep counting the traffic light until the light changes
         self.state_count += 1
 
-    def get_closest_waypoint(self, pose, x, y):
+    def get_closest_waypoint(self, x, y):
         """Identifies the closest path waypoint to the given position
             https://en.wikipedia.org/wiki/Closest_pair_of_points_problem
         Args:
@@ -197,6 +197,7 @@ class TLDetector(object):
         off-line testing by returning the traffic light 
         state from the simulator
         '''
+        rospy.logwarn("Light State: {0}".format(light.state))
         return light.state
         
         #################################################
